@@ -1,19 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import { NextPageContext } from "next";
-import "./searchbar.module.css";
+import { useState } from "react";
 
-function SearchBar() {
-  const [searchTerm, setSearchTerm] = useState("");
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  };
+function SearchBar({ handleData }: { handleData: () => void }) {
+  const [query, setQuery] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(`Search term: ${searchTerm}`);
   };
 
   return (
@@ -21,16 +14,32 @@ function SearchBar() {
       <input
         type="text"
         placeholder="Search..."
-        value={searchTerm}
-        onChange={handleChange}
+        value={query}
+        onChange={(e) => {
+          setQuery(e.currentTarget.value);
+          console.log(e.currentTarget.value);
+        }}
       />
-      <button type="submit">Search</button>
+      <button
+        type="submit"
+        onClick={() => {
+          if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+              var lat = position.coords.latitude;
+              var lon = position.coords.longitude;
+              console.log("Latitude: " + lat + ", Longitude: " + lon);
+            });
+          } else {
+            console.log("Geolocation is not supported by this browser.");
+          }
+
+          console.log(query);
+        }}
+      >
+        Search
+      </button>
     </form>
   );
 }
-
-SearchBar.getInitialProps = async (_: NextPageContext) => {
-  return { placeholder: "" };
-};
 
 export default SearchBar;

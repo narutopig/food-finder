@@ -14,8 +14,8 @@ async function getStuff(query: string) {
       branded_type: "2",
       detailed: "True",
       common_restaurant: "False",
-      common_grocery: "False",
-    },
+      common_grocery: "False"
+    }
   };
 
   return await fetch(url, options).then((res) => res.json());
@@ -28,8 +28,6 @@ export default async function handler(
   const query = req.body["query"];
 
   const things = await getStuff(query);
-
-  console.log(things);
 
   res.status(200).send(things);
 }
