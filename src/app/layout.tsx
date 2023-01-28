@@ -1,9 +1,13 @@
-import './globals.css'
+import "./globals.css";
+
+import { Inter } from "@next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({
-  children,
+  children
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
@@ -14,5 +18,5 @@ export default function RootLayout({
       <head />
       <body>{children}</body>
     </html>
-  )
+  );
 }

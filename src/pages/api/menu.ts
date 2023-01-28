@@ -6,8 +6,8 @@ async function getData(query: string, brands: string[]) {
     method: "GET",
     headers: {
       "x-app-id": "725e70a7",
-      "x-app-key": "9906820411b1b0a80e5079d383000c25",
-    },
+      "x-app-key": "9906820411b1b0a80e5079d383000c25"
+    }
   };
 
   const brandIds = JSON.stringify(brands);
