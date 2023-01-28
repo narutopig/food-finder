@@ -1,3 +1,24 @@
+export interface RestaurantData {
+  name: string;
+  brand_id: string;
+  fs_id: string | null;
+  address: string;
+  address2: string | null;
+  city: string;
+  state: string;
+  country: string;
+  zip: string;
+  phone: string; // maybe null
+  website: string;
+  guide: string | null; // probably unused because its bad html
+  id: number;
+  lat: number;
+  lng: number;
+  created_at: string;
+  updated_at: string;
+  distance_km: number; // probably inaccurate
+}
+
 export interface SearchData {
   total_hits: number;
   max_score: number;
@@ -22,27 +43,23 @@ export interface Fields {
   nf_serving_size_unit: number;
 }
 
-export interface RestaurantData {
-  name: string;
-  brand_id: string;
-  fs_id: string | null;
-  address: string;
-  address2: string | null;
-  city: string;
-  state: string;
-  country: string;
-  zip: string;
-  phone: string; // maybe null
-  website: string;
-  guide: string | null; // probably unused because its bad html
-  id: number;
-  lat: number;
-  lng: number;
-  created_at: string;
-  updated_at: string;
-  distance_km: number; // probably inaccurate
+export interface Photo {
+  thumb: string;
+  highres?: any;
+  is_user_uploaded?: boolean;
 }
 
-export interface RestaurantLocationData {
-  locations: RestaurantData[];
+export interface Product {
+  food_name: string;
+  serving_unit: string;
+  nix_brand_id: string;
+  brand_name_item_name: string;
+  serving_qty: number;
+  nf_calories: number;
+  photo: Photo;
+  brand_name: string;
+  region: number;
+  brand_type: number;
+  nix_item_id: string;
+  locale: string;
 }

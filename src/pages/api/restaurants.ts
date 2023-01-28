@@ -1,4 +1,4 @@
-import { RestaurantLocationData } from "@/types";
+import { RestaurantData } from "@/types";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 async function getData(
@@ -23,12 +23,12 @@ async function getData(
     options
   ).then((response) => response.json());
 
-  return res as RestaurantLocationData;
+  return res as { locations: RestaurantData[] };
 }
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<RestaurantLocationData>
+  res: NextApiResponse<{ locations: RestaurantData[] }>
 ) {
   const { lat, lng, distance, limit } = req.body;
 
