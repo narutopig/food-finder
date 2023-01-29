@@ -1,4 +1,4 @@
-import { Product } from "@/types";
+import { ErrorResponse, Product } from "@/types";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 async function getData(query: string, brands: string[]) {
@@ -26,11 +26,14 @@ async function getData(query: string, brands: string[]) {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Product[]>
+  res: NextApiResponse<Product[] | ErrorResponse>
 ) {
-  const { query, brands } = req.body;
+  const { query, brands } = req.query;
 
-  const { branded } = await getData(query, brands);
-
-  res.status(200).send(branded);
+  if (typeof query == "string" && typeof brands === "string") {
+    const { branded } = await getData(query, [brands]);
+    res.status(200).send(branded);
+  } else {
+    res.status(400).send({ message: "Invalid request" });
+  }
 }

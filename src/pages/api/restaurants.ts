@@ -1,4 +1,4 @@
-import { RestaurantData } from "@/types";
+import { ErrorResponse, RestaurantData } from "@/types";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 async function getData(
@@ -12,8 +12,8 @@ async function getData(
     headers: {
       "x-app-id": "725e70a7",
       "x-app-key": "9906820411b1b0a80e5079d383000c25",
-      "Content-Type": "application/json",
-    },
+      "Content-Type": "application/json"
+    }
   };
 
   const ll = encodeURIComponent(latitude + "," + longitude);
@@ -28,11 +28,19 @@ async function getData(
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<{ locations: RestaurantData[] }>
+  res: NextApiResponse<{ locations: RestaurantData[] } | ErrorResponse>
 ) {
-  const { lat, lng, distance, limit } = req.body;
+  const { lat, lng, distance, limit } = req.query;
 
-  const stuff = await getData(lat, lng, distance, limit);
-
-  res.status(200).send(stuff);
+  if (
+    typeof lat === "string" &&
+    typeof lng === "string" &&
+    typeof distance === "string" &&
+    typeof limit === "string"
+  ) {
+    const stuff = await getData(lat, lng, distance, limit);
+    res.status(200).send(stuff);
+  } else {
+    res.status(400).send({ message: "Invalid request" });
+  }
 }

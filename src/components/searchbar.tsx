@@ -27,10 +27,12 @@ function SearchBar({
         url.searchParams.append("distance", "10");
         url.searchParams.append("limit", "50");
 
-        const restaurants = (await fetch(url, {
-          method: "GET",
-          headers: { "Content-Type": "application/json" }
-        }).then((res) => res.json())) as RestaurantData[];
+        const restaurants = (
+          await fetch(url, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+          }).then((res) => res.json())
+        ).locations as RestaurantData[];
 
         restaurants.forEach(async (restaurant: RestaurantData) => {
           const url = new URL("/api/menu", window.location.origin);

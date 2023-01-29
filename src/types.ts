@@ -63,3 +63,7 @@ export interface Product {
   nix_item_id: string;
   locale: string;
 }
+
+export interface ErrorResponse {
+  message: string;
+}
