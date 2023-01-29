@@ -17,42 +17,56 @@ function SearchBar({
 
   function submit() {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(async function (position) {
-        let lat = position.coords.latitude;
-        let lon = position.coords.longitude;
+      navigator.geolocation.getCurrentPosition(
+        async function (position) {
+          let lat = position.coords.latitude;
+          let lon = position.coords.longitude;
 
-        const url = new URL("/api/restaurants", window.location.origin);
-        url.searchParams.append("lat", lat.toString());
-        url.searchParams.append("lng", lon.toString());
-        url.searchParams.append("distance", "10");
-        url.searchParams.append("limit", "50");
+          const url = `http://localhost:3000/api/restaurants?lat=${lat}&lng=${lon}&distance=10&limit=50`;
 
-        const restaurants = (
-          await fetch(url, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" }
-          }).then((res) => {
-            return res.json();
-          })
-        ).locations as RestaurantData[];
+          const restaurants = (
+            await fetch(url, {
+              method: "GET",
+              headers: { "Content-Type": "application/json" }
+            }).then((res) => {
+              return res.json();
+            })
+          ).locations as RestaurantData[];
 
-        const theThings = new Map<RestaurantData, Product[]>();
+          const theThings = new Map<RestaurantData, Product[]>();
 
-        for await (const restaurant of restaurants) {
-          const url = new URL("/api/menu", window.location.origin);
-          url.searchParams.append("query", query);
-          url.searchParams.append("brands", restaurant.brand_id);
+          for await (const restaurant of restaurants) {
+            const url = new URL("/api/menu", window.location.origin);
+            url.searchParams.append("query", query);
+            url.searchParams.append("brands", restaurant.brand_id);
 
-          const another = (await fetch(url, {
-            method: "GET",
-            headers: { "Content-Type": "application/json" }
-          }).then((res) => res.json())) as Product[];
+            const another = (await fetch(url, {
+              method: "GET",
+              headers: { "Content-Type": "application/json" }
+            }).then((res) => res.json())) as Product[];
 
-          theThings.set(restaurant, another);
+            theThings.set(restaurant, another);
+          }
+
+          handleData(theThings);
+        },
+        function (error) {
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              console.log("User denied the request for Geolocation.");
+              break;
+            case error.POSITION_UNAVAILABLE:
+              console.log("Location information is unavailable.");
+              break;
+            case error.TIMEOUT:
+              console.log("The request to get user location timed out.");
+              break;
+            case error.UNKNOWN_ERROR:
+              console.log("An unknown error occurred.");
+              break;
+          }
         }
-
-        handleData(theThings);
-      });
+      );
     } else {
       alert(
         "This app will (probably) not work if you do not enable Geolocation"

@@ -663,6 +663,7 @@ export default async function handler(
 ) {
   const { lat, lng, distance, limit } = req.query;
 
+  console.log("APIFIOPUFOIPDUFPOID");
   if (
     typeof lat === "string" &&
     typeof lng === "string" &&

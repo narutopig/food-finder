@@ -8,6 +8,8 @@ function Search() {
   const [restaurants, setRestaurants] = useState<Rest[]>([]);
 
   const handler = (stuffs: Map<RestaurantData, Product[]>) => {
+    console.log(stuffs);
+
     for (const [key, value] of stuffs.entries()) {
       const temp: Rest = {
         name: key.name,
