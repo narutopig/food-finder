@@ -3,7 +3,6 @@ import mainStyles from "@/app/page.module.css";
 import { Product, Restaurant as Rest, RestaurantData } from "@/types";
 import { useState } from "react";
 import Restaurant from "@/components/restaurant";
-import { randomUUID } from "crypto";
 
 function Search() {
   const [restaurants, setRestaurants] = useState<Rest[]>([]);
@@ -11,7 +10,7 @@ function Search() {
   const handler = (stuffs: Map<RestaurantData, Product[]>) => {
     console.log(stuffs);
 
-    const thing = Array.from(stuffs.entries()).slice(0, 9);
+    const thing = Array.from(stuffs.entries());
 
     setRestaurants(
       thing.map(([key, value]) => {

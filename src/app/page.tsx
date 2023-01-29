@@ -1,7 +1,6 @@
 "use client";
 
 import styles from "./page.module.css";
-import Attribution from "@/components/attribution";
 import Navbar from "@/components/navbar";
 
 export default function Home() {
@@ -15,7 +14,6 @@ export default function Home() {
         <hr />
         <img src="/restaurant.jpg" alt="restaurant image" />
       </div>
-      <Attribution />
     </div>
   );
 }

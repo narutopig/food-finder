@@ -16,7 +16,14 @@ function format(phoneNumber: string) {
 }
 
 function Restaurant({ name, restaurant, products }: Rest) {
+  const phoneRegex = /\+1[0-9]{10}/;
+
   const [expanded, setExpanded] = useState(false);
+
+  const validate = (phone: string) => {
+    const match = phone.match(phoneRegex);
+    return match && phone === match[0];
+  };
 
   return (
     <div className={styles.container} style={{ flexDirection: "row" }}>
@@ -28,8 +35,13 @@ function Restaurant({ name, restaurant, products }: Rest) {
             </a>
           ) : (
             <p>{name}</p>
-          )}{" "}
-          - {format(restaurant.phone)}
+          )}
+
+          {validate(restaurant.phone) ? (
+            <> - {format(restaurant.phone)}</>
+          ) : (
+            <></>
+          )}
         </h3>
         <p style={{ float: "right" }}>{restaurant.distance_km.toFixed(1)} km</p>
       </div>
