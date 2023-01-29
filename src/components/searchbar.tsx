@@ -62,17 +62,43 @@ function SearchBar({
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Search..."
-        value={query}
-        onChange={(e) => {
-          setQuery(e.currentTarget.value);
-        }}
-      />
-      <button type="submit">Search</button>
-    </form>
+    <div
+      className="search"
+      style={{
+        display: "flex",
+        justifyContent: "flex-end",
+        margin: 0,
+        padding: 0
+      }}
+    >
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Search..."
+          value={query}
+          onChange={(e) => {
+            setQuery(e.currentTarget.value);
+          }}
+          style={{
+            float: "right",
+            marginLeft: "auto",
+            margin: 0,
+            alignSelf: "flex-end"
+          }}
+        />
+        <button
+          type="submit"
+          style={{
+            float: "right",
+            marginLeft: "auto",
+            margin: 0,
+            alignSelf: "flex-end"
+          }}
+        >
+          Search
+        </button>
+      </form>
+    </div>
   );
 }
 

@@ -14,26 +14,6 @@
   border: 4px double #000;
 }
 
-.container input {
-  float: right;
-  padding: 6px;
-  border: none;
-  margin-top: 8px;
-  margin-right: 16px;
-  font-size: 17px;
-}
-
-.container button {
-  float: right;
-  padding: 6px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
-  background: #55d;
-  font-size: 17px;
-  border: none;
-  cursor: pointer;
-}
-
 .container ul {
   width: 570px;
   padding: 15px;
@@ -65,4 +45,24 @@
 
 .content {
   text-align: center;
+}
+
+.container input {
+  float: right;
+  padding: 6px;
+  border: none;
+  margin-top: 8px;
+  margin-right: 16px;
+  font-size: 17px;
+}
+
+.container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #55d;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
 }
