@@ -15,22 +15,22 @@ interface Restaurant {
 export default function Home() {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
 
+  const handler = (stuffs: Map<RestaurantData, Product[]>) => {
+    for (const [key, value] of stuffs.entries()) {
+      const temp: Restaurant = {
+        name: key.name,
+        id: key.brand_id,
+        products: value
+      };
+
+      setRestaurants([...restaurants, temp]);
+    }
+  };
+
   return (
     <main className={styles.main}>
       <div className={styles.center}>
-        <SearchBar
-          handleData={(stuffs: Map<RestaurantData, Product[]>) => {
-            for (const [key, value] of stuffs.entries()) {
-              const temp: Restaurant = {
-                name: key.name,
-                id: key.brand_id,
-                products: value
-              };
-
-              setRestaurants([...restaurants, temp]);
-            }
-          }}
-        />
+        <SearchBar handleData={handler} />
       </div>
       <Attribution />
     </main>
