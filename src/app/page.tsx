@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 import Attribution from "@/components/attribution";
 import SearchBar from "@/components/searchbar";
 import { useState } from "react";
-import type { Product } from "../types";
+import type { Product, RestaurantData } from "../types";
 
 interface Restaurant {
   name: string;
@@ -19,8 +19,16 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.center}>
         <SearchBar
-          handleData={() => {
-            console.log("AMONGA");
+          handleData={(stuffs: Map<RestaurantData, Product[]>) => {
+            for (const [key, value] of stuffs.entries()) {
+              const temp: Restaurant = {
+                name: key.name,
+                id: key.brand_id,
+                products: value
+              };
+
+              setRestaurants([...restaurants, temp]);
+            }
           }}
         />
       </div>

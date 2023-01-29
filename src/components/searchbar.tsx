@@ -1,8 +1,13 @@
 "use client";
 
+import type { RestaurantData, Product } from "@/types";
 import { useState } from "react";
 
-function SearchBar({ handleData }: { handleData: () => void }) {
+function SearchBar({
+  handleData
+}: {
+  handleData: (arg: Map<RestaurantData, Product[]>) => void;
+}) {
   const [query, setQuery] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -24,16 +29,18 @@ function SearchBar({ handleData }: { handleData: () => void }) {
         type="submit"
         onClick={() => {
           if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function (position) {
-              var lat = position.coords.latitude;
-              var lon = position.coords.longitude;
+            navigator.geolocation.getCurrentPosition(async function (position) {
+              let lat = position.coords.latitude;
+              let lon = position.coords.longitude;
+
               console.log("Latitude: " + lat + ", Longitude: " + lon);
             });
           } else {
-            console.log("Geolocation is not supported by this browser.");
+            alert(
+              "This app will (probably) not work if you do not enable Geolocation"
+            );
+            console.warn("Geolocation is not supported by this browser.");
           }
-
-          console.log(query);
         }}
       >
         Search
