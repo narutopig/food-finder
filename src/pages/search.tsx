@@ -13,7 +13,8 @@ import Navbar from "@/components/navbar";
 
 function Search() {
   const [restaurants, setRestaurants] = useState<Rest[]>([]);
-  const [conditions, setConditions] = useState<Condition[]>([]);
+  const [dist_limit, setDLimit] = useState(5);
+  const [calLimit, setCalLimit] = useState(2000);
 
   const handler = (stuffs: Map<RestaurantData, Product[]>) => {
     const thing = Array.from(stuffs.entries());
@@ -65,10 +66,6 @@ function Search() {
         });
       }
     }
-
-    console.log(res);
-
-    setConditions(res);
   };
 
   return (
@@ -84,14 +81,36 @@ function Search() {
     >
       <Navbar />
       <SearchBar handleData={handler} getComparisons={setComparisons} />
+      <label>Max Calories: {calLimit}</label>
+      <input
+        type="range"
+        min={0}
+        max={2000}
+        value={calLimit}
+        onChange={(e) => setCalLimit(parseInt(e.currentTarget.value))}
+        className="slider"
+        id="cals"
+      ></input>
+      <label>Max Distance: {dist_limit}</label>
+      <input
+        type="range"
+        min={0}
+        max={2000}
+        value={dist_limit}
+        onChange={(e) => setDLimit(parseInt(e.currentTarget.value))}
+        className="slider"
+        id="dist"
+      ></input>
       {restaurants.length > 0 ? (
         <>
-          {restaurants.map((rest) => (
-            <Restaurant
-              key={Math.random() * Math.random() * 100000}
-              {...rest}
-            />
-          ))}
+          {restaurants
+            .filter((rest) => rest.restaurant.distance_km < dist_limit)
+            .map((rest) => (
+              <Restaurant
+                key={Math.random() * Math.random() * 100000}
+                {...rest}
+              />
+            ))}
         </>
       ) : (
         <>Make a query to see some cool stuff!</>

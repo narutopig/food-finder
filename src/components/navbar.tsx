@@ -17,9 +17,6 @@ function Navbar() {
           <li>
             <Link href="/search">Search</Link>
           </li>
-          <li>
-            <Link href="/goals">Goals</Link>
-          </li>
         </ul>
       </nav>
     </div>
