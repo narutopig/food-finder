@@ -72,6 +72,17 @@ function SearchBar({
       }}
     >
       <form onSubmit={handleSubmit}>
+        <button
+          type="submit"
+          style={{
+            float: "right",
+            marginLeft: "auto",
+            margin: 0,
+            alignSelf: "flex-end"
+          }}
+        >
+          Search
+        </button>
         <input
           type="text"
           placeholder="Search..."
@@ -86,17 +97,6 @@ function SearchBar({
             alignSelf: "flex-end"
           }}
         />
-        <button
-          type="submit"
-          style={{
-            float: "right",
-            marginLeft: "auto",
-            margin: 0,
-            alignSelf: "flex-end"
-          }}
-        >
-          Search
-        </button>
       </form>
     </div>
   );

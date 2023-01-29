@@ -67,3 +67,10 @@ export interface Product {
 export interface ErrorResponse {
   message: string;
 }
+
+export interface Restaurant {
+  name: string;
+  id: string;
+  restaurant: RestaurantData;
+  products: Product[];
+}
