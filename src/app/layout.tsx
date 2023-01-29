@@ -13,7 +13,6 @@ export default function RootLayout({
   return (
     <div className={styles.container}>
       <Navbar />
-
       <Head />
       <head />
       <body className="main">{children}</body>

@@ -19,7 +19,7 @@ function format(phoneNumber: string) {
 function Restaurant({ name, restaurant, products }: Rest) {
   const phoneRegex = /\+1[0-9]{10}/;
 
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(false);
 
   const validate = (phone: string) => {
     const match = phone.match(phoneRegex);
@@ -28,7 +28,10 @@ function Restaurant({ name, restaurant, products }: Rest) {
 
   return (
     <div className={styles.supercontainer}>
-      <div className={styles.container} style={{ flexDirection: "row" }}>
+      <div
+        className={styles.container}
+        style={{ flexDirection: "row", position: "relative", padding: "2%" }}
+      >
         <div>
           <h3>
             {restaurant.website ? (
@@ -48,11 +51,25 @@ function Restaurant({ name, restaurant, products }: Rest) {
           <p style={{ float: "right" }}>
             {restaurant.distance_km.toFixed(1)} km
           </p>
+          <button
+            onClick={() => setExpanded(!expanded)}
+            style={{
+              all: "unset",
+              height: "20px",
+              float: "right",
+              position: "absolute",
+              top: "0px",
+              right: "0px",
+              margin: "1%"
+            }}
+          >
+            <h3>▼</h3>
+          </button>
         </div>
 
-        <div className={styles.footer}>
+        <footer className={styles.footer}>
           {restaurant.city}, {restaurant.state}
-        </div>
+        </footer>
       </div>
 
       <div style={{ marginLeft: "10%" }}>
