@@ -2,10 +2,10 @@ import { ErrorResponse, RestaurantData } from "@/types";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 async function getData(
-  latitude: number,
-  longitude: number,
-  distance: number,
-  limit: number
+  latitude: string,
+  longitude: string,
+  distance: string,
+  limit: string
 ) {
   const options = {
     method: "GET",
