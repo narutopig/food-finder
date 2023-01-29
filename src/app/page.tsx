@@ -31,6 +31,7 @@ export default function Home() {
     <main className={styles.main}>
       <div className={styles.center}>
         <SearchBar handleData={handler} />
+        {restaurants.length}
       </div>
       <Attribution />
     </main>

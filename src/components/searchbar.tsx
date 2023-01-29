@@ -31,10 +31,14 @@ function SearchBar({
           await fetch(url, {
             method: "GET",
             headers: { "Content-Type": "application/json" }
-          }).then((res) => res.json())
+          }).then((res) => {
+            return res.json();
+          })
         ).locations as RestaurantData[];
 
-        restaurants.forEach(async (restaurant: RestaurantData) => {
+        const theThings = new Map<RestaurantData, Product[]>();
+
+        for await (const restaurant of restaurants) {
           const url = new URL("/api/menu", window.location.origin);
           url.searchParams.append("query", query);
           url.searchParams.append("brands", restaurant.brand_id);
@@ -45,9 +49,7 @@ function SearchBar({
           }).then((res) => res.json())) as Product[];
 
           theThings.set(restaurant, another);
-        });
-
-        const theThings = new Map<RestaurantData, Product[]>();
+        }
 
         handleData(theThings);
       });
