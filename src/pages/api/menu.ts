@@ -1,13 +1,13 @@
 import { ErrorResponse, Product } from "@/types";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { config } from "@/config";
 
-/*
 async function getData(query: string, brands: string[]) {
   const options = {
     method: "GET",
     headers: {
-      "x-app-id": "725e70a7",
-      "x-app-key": "9906820411b1b0a80e5079d383000c25"
+      "x-app-id": config.appId,
+      "x-app-key": config.appKey
     }
   };
 
@@ -24,8 +24,8 @@ async function getData(query: string, brands: string[]) {
 
   return res;
 }
-*/
 
+/*
 async function getData(query: any, brands: any) {
   const bruh = {
     branded: [
@@ -423,6 +423,7 @@ async function getData(query: any, brands: any) {
 
   return bruh as { branded: Product[] };
 }
+*/
 
 export default async function handler(
   req: NextApiRequest,

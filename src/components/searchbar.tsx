@@ -114,13 +114,13 @@ function SearchBar({
             alignSelf: "flex-end"
           }}
         />
-        <button onClick={() => getComparisons(filters)}>Apply Filters</button>
+        {/* <button onClick={() => getComparisons(filters)}>Apply Filters</button>
         <input
           type="text"
           placeholder="Filters... (e.g calories<100, sugar<5, etc.)"
           value={filters}
           onChange={(e) => setFilters(e.currentTarget.value)}
-        />
+        /> */}
       </form>
     </div>
   );

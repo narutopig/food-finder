@@ -1,12 +1,13 @@
 import { ErrorResponse, Food } from "@/types";
 import type { NextApiRequest, NextApiResponse } from "next";
+import { config } from "@/config";
 
 async function getData(id: string) {
   const options = {
     method: "GET",
     headers: {
-      "x-app-id": "ae56a8a5",
-      "x-app-key": "bf50ea456ea81cd6dddbda7a844ba54b",
+      "x-app-id": config.appId,
+      "x-app-key": config.appKey,
       "Content-Type": "application/json"
     }
   };
