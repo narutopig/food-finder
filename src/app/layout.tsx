@@ -1,8 +1,9 @@
 import "./globals.css";
 
-import { Inter } from "@next/font/google";
 import Head from "./head";
 import Attribution from "@/components/attribution";
+import Navbar from "@/components/navbar";
+import styles from "./page.module.css";
 
 export default function RootLayout({
   children
@@ -10,11 +11,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <div className={styles.container}>
+      <Navbar />
+
       <Head />
       <head />
       <body className="main">{children}</body>
       <Attribution />
-    </html>
+    </div>
   );
 }
