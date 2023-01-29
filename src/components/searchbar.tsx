@@ -1,14 +1,17 @@
 "use client";
 
-import type { RestaurantData, Product } from "@/types";
+import type { RestaurantData, Product, Condition } from "@/types";
 import { useState } from "react";
 
 function SearchBar({
-  handleData
+  handleData,
+  getComparisons
 }: {
   handleData: (arg: Map<RestaurantData, Product[]>) => void;
+  getComparisons: (arg: string) => void;
 }) {
   const [query, setQuery] = useState("");
+  const [filters, setFilters] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -110,6 +113,13 @@ function SearchBar({
             margin: 0,
             alignSelf: "flex-end"
           }}
+        />
+        <button onClick={() => getComparisons(filters)}>Apply Filters</button>
+        <input
+          type="text"
+          placeholder="Filters... (e.g calories<100, sugar<5, etc.)"
+          value={filters}
+          onChange={(e) => setFilters(e.currentTarget.value)}
         />
       </form>
     </div>

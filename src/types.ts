@@ -116,3 +116,9 @@ export interface Food {
   updated_at: Date;
   nf_ingredient_statement?: any;
 }
+
+export interface Condition {
+  name: string;
+  comparison: "<" | ">" | "=" | ">=" | "<=";
+  compareTo: number;
+}
