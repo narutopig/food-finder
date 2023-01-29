@@ -3,6 +3,7 @@ import mainStyles from "@/app/page.module.css";
 import { Product, Restaurant as Rest, RestaurantData } from "@/types";
 import { useState } from "react";
 import Restaurant from "@/components/restaurant";
+import Navbar from "@/components/navbar";
 
 function Search() {
   const [restaurants, setRestaurants] = useState<Rest[]>([]);
@@ -31,9 +32,13 @@ function Search() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "column"
+        flexDirection: "column",
+        position: "relative"
       }}
     >
+      <div style={{ position: "absolute", top: 0 }}>
+        <Navbar />
+      </div>
       <SearchBar handleData={handler} />
       {restaurants.length > 0 ? (
         <>

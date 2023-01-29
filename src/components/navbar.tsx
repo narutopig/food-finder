@@ -4,6 +4,7 @@ import styles from "./navbar.module.css";
 function Navbar() {
   return (
     <div className={styles.navbar}>
+      <title>Restaurant Finder</title>
       <nav>
         <ul>
           <br />
