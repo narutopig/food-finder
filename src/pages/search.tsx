@@ -95,9 +95,10 @@ function Search() {
       <input
         type="range"
         min={0}
-        max={2000}
+        max={5}
+        step={0.1}
         value={dist_limit}
-        onChange={(e) => setDLimit(parseInt(e.currentTarget.value))}
+        onChange={(e) => setDLimit(parseFloat(e.currentTarget.value))}
         className="slider"
         id="dist"
       ></input>
@@ -109,6 +110,9 @@ function Search() {
               <Restaurant
                 key={Math.random() * Math.random() * 100000}
                 {...rest}
+                products={rest.products.filter(
+                  (p) => p.nf_calories <= calLimit
+                )}
               />
             ))}
         </>
