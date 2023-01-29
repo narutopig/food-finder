@@ -50,7 +50,7 @@ function SearchBar({
 
           handleData(theThings);
         },
-        function (error) {
+        function (error: any) {
           switch (error.code) {
             case error.PERMISSION_DENIED:
               console.log("User denied the request for Geolocation.");

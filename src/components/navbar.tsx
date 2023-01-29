@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./navbar.module.css";
 
 function Navbar() {
@@ -7,13 +8,13 @@ function Navbar() {
         <ul>
           <br />
           <li>
-            <a href="/">Home</a>
+            <Link href="/">Home</Link>
           </li>
           <li>
-            <a href="/about">About</a>
+            <Link href="/about">About</Link>
           </li>
           <li>
-            <a href="/search">Search</a>
+            <Link href="/search">Search</Link>
           </li>
         </ul>
       </nav>
