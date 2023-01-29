@@ -9,19 +9,19 @@ function Search() {
   const [restaurants, setRestaurants] = useState<Rest[]>([]);
 
   const handler = (stuffs: Map<RestaurantData, Product[]>) => {
-    console.log(stuffs);
-
     const thing = Array.from(stuffs.entries());
 
     setRestaurants(
-      thing.map(([key, value]) => {
-        return {
-          name: key.name,
-          id: key.brand_id,
-          restaurant: key,
-          products: value
-        };
-      })
+      thing
+        .map(([key, value]) => {
+          return {
+            name: key.name,
+            id: key.brand_id,
+            restaurant: key,
+            products: value
+          };
+        })
+        .filter((value) => value.products.length > 0)
     );
   };
 
@@ -36,9 +36,7 @@ function Search() {
         position: "relative"
       }}
     >
-      <div style={{ position: "absolute", top: 0 }}>
-        <Navbar />
-      </div>
+      <Navbar />
       <SearchBar handleData={handler} />
       {restaurants.length > 0 ? (
         <>

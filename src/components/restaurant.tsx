@@ -62,6 +62,7 @@ function Restaurant({ name, restaurant, products }: Rest) {
               right: "0px",
               margin: "1%"
             }}
+            title={`Click to ${expanded ? "collapse" : "expand"}`}
           >
             <h3>▼</h3>
           </button>
@@ -74,16 +75,21 @@ function Restaurant({ name, restaurant, products }: Rest) {
 
       <div style={{ marginLeft: "10%" }}>
         {expanded ? (
-          <table>
-            <tr>
-              <th scope="col"></th> {/*for images*/}
-              <th scope="col">Name</th>
-              <th scope="col">Calories</th>
-            </tr>
+          <table style={{ border: "1px solid" }}>
+            <thead style={{ border: "1px solid" }}>
+              <tr>
+                <th scope="col"></th> {/*for images*/}
+                <th scope="col">Name</th>
+                <th scope="col">Calories</th>
+                <th scope="col"></th> {/*for button*/}
+              </tr>
+            </thead>
 
-            {products.map((prod) => (
-              <ProductDisplay key={prod.nix_item_id} {...prod} />
-            ))}
+            <tbody style={{ border: "1px solid" }}>
+              {products.map((prod) => (
+                <ProductDisplay key={prod.nix_item_id} {...prod} />
+              ))}
+            </tbody>
           </table>
         ) : (
           <></>
