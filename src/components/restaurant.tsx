@@ -2,6 +2,7 @@
 
 import type { Restaurant as Rest } from "@/types";
 import { useState } from "react";
+import ProductDisplay from "./product";
 import styles from "./restaurant.module.css";
 
 function format(phoneNumber: string) {
@@ -18,7 +19,7 @@ function format(phoneNumber: string) {
 function Restaurant({ name, restaurant, products }: Rest) {
   const phoneRegex = /\+1[0-9]{10}/;
 
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(true);
 
   const validate = (phone: string) => {
     const match = phone.match(phoneRegex);
@@ -26,28 +27,50 @@ function Restaurant({ name, restaurant, products }: Rest) {
   };
 
   return (
-    <div className={styles.container} style={{ flexDirection: "row" }}>
-      <div>
-        <h3>
-          {restaurant.website ? (
-            <a href={restaurant.website} target="_blank" rel="noreferrer">
-              {name}
-            </a>
-          ) : (
-            <p>{name}</p>
-          )}
+    <div className={styles.supercontainer}>
+      <div className={styles.container} style={{ flexDirection: "row" }}>
+        <div>
+          <h3>
+            {restaurant.website ? (
+              <a href={restaurant.website} target="_blank" rel="noreferrer">
+                {name}
+              </a>
+            ) : (
+              <p>{name}</p>
+            )}
 
-          {validate(restaurant.phone) ? (
-            <> - {format(restaurant.phone)}</>
-          ) : (
-            <></>
-          )}
-        </h3>
-        <p style={{ float: "right" }}>{restaurant.distance_km.toFixed(1)} km</p>
+            {validate(restaurant.phone) ? (
+              <> - {format(restaurant.phone)}</>
+            ) : (
+              <></>
+            )}
+          </h3>
+          <p style={{ float: "right" }}>
+            {restaurant.distance_km.toFixed(1)} km
+          </p>
+        </div>
+
+        <div className={styles.footer}>
+          {restaurant.city}, {restaurant.state}
+        </div>
       </div>
 
-      <div className={styles.footer}>
-        {restaurant.city}, {restaurant.state}
+      <div style={{ marginLeft: "10%" }}>
+        {expanded ? (
+          <table>
+            <tr>
+              <th scope="col"></th> {/*for images*/}
+              <th scope="col">Name</th>
+              <th scope="col">Calories</th>
+            </tr>
+
+            {products.map((prod) => (
+              <ProductDisplay key={prod.nix_item_id} {...prod} />
+            ))}
+          </table>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

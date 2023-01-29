@@ -38,12 +38,10 @@ function Search() {
       {restaurants.length > 0 ? (
         <>
           {restaurants.map((rest) => (
-            <>
-              <Restaurant
-                key={Math.random() * Math.random() * 100000}
-                {...rest}
-              />
-            </>
+            <Restaurant
+              key={Math.random() * Math.random() * 100000}
+              {...rest}
+            />
           ))}
         </>
       ) : (

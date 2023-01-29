@@ -1,12 +1,20 @@
 import { Product } from "@/types";
-import Image from "next/image";
 
 function ProductDisplay(product: Product) {
   return (
-    <div className="container">
-      <Image src={product.photo.thumb} className="icon" alt=""></Image>
-      <span className="text">Text goes here</span>
-    </div>
+    <tr className="container">
+      <td>
+        <img
+          src={product.photo.thumb}
+          className="icon"
+          alt=""
+          height="40px"
+          width="auto"
+        />
+      </td>
+      <td style={{ wordWrap: "break-word" }}>{product.food_name}</td>
+      <td>{product.nf_calories}</td>
+    </tr>
   );
 }
 
