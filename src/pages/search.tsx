@@ -81,7 +81,7 @@ function Search() {
     >
       <Navbar />
       <SearchBar handleData={handler} getComparisons={setComparisons} />
-      <label>Max Calories: {calLimit}</label>
+      <label>Max Calories: {calLimit} calories</label>
       <input
         type="range"
         min={0}
@@ -91,7 +91,7 @@ function Search() {
         className="slider"
         id="cals"
       ></input>
-      <label>Max Distance: {dist_limit}</label>
+      <label>Max Distance: {dist_limit}mi</label>
       <input
         type="range"
         min={0}
